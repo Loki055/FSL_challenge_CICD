@@ -1,0 +1,47 @@
+name: FSL CI Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '15.14.0'
+
+      - name: Install specific npm version
+        run: npm install -g npm@7.0.0
+
+      - name: List files for debugging
+        run: ls -al ./codebase/rdicidr-0.1.0
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./codebase/rdicidr-0.1.0
+
+      - name: Lint code
+        run: npm run lint
+        working-directory: ./codebase/rdicidr-0.1.0
+
+      - name: Format code
+        run: npm run prerttier
+        working-directory: ./codebase/rdicidr-0.1.0
+
+      - name: Run tests
+        run: CI=true npm run test
+        working-directory: ./codebase/rdicidr-0.1.0
+
+      - name: ild project
+        run: npm run build
+        working-directory: ./codebase/rdicidr-0.1.0
+
+      
