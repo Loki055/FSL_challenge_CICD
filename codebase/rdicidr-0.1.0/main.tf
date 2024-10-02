@@ -3,5 +3,5 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "fsl-bucket-055"
+  bucket = "fsl-bucket-056"
 }
